@@ -1,0 +1,251 @@
+import { Check, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
+
+interface TicketCategory {
+  category: string;
+  price: string;
+}
+
+interface TicketBatch {
+  name: string;
+  subtitle?: string;
+  vacancies: string;
+  categories: TicketCategory[];
+  highlighted?: boolean;
+}
+
+const ticketBatches: TicketBatch[] = [
+  {
+    name: 'LOTE PROMOCIONAL',
+    vacancies: '50 VAGAS',
+    categories: [
+      { category: 'Estudantes', price: 'R$ 150,00' },
+      { category: 'Profissionais de outras áreas', price: 'R$ 180,00' },
+      { category: 'Médicos/Residentes', price: 'R$ 200,00' },
+    ],
+    highlighted: true,
+  },
+  {
+    name: 'LOTE ESPECIAL',
+    subtitle: 'PROGRAMAS ESTUDANTIS DO GOVERNO FEDERAL',
+    vacancies: '15 VAGAS (FIES, FIES SOCIAL, PROUNI)',
+    categories: [{ category: 'Estudantes', price: 'R$ 100,00' }],
+  },
+  {
+    name: '1º LOTE',
+    vacancies: '50 VAGAS',
+    categories: [
+      { category: 'Estudantes', price: 'R$ 250,00' },
+      { category: 'Profissionais de outras áreas', price: 'R$ 280,00' },
+      { category: 'Médicos/Residentes', price: 'R$ 300,00' },
+    ],
+  },
+  {
+    name: '2º LOTE',
+    vacancies: '150 VAGAS',
+    categories: [
+      { category: 'Estudantes', price: 'R$ 300,00' },
+      { category: 'Profissionais de outras áreas', price: 'R$ 320,00' },
+      { category: 'Médicos/Residentes', price: 'R$ 360,00' },
+    ],
+  },
+  {
+    name: '3º LOTE',
+    vacancies: '150 VAGAS',
+    categories: [
+      { category: 'Estudantes', price: 'R$ 350,00' },
+      { category: 'Profissionais de outras áreas', price: 'R$ 380,00' },
+      { category: 'Médicos/Residentes', price: 'R$ 410,00' },
+    ],
+  },
+  {
+    name: '4º LOTE',
+    vacancies: '150 VAGAS',
+    categories: [
+      { category: 'Estudantes', price: 'R$ 400,00' },
+      { category: 'Profissionais de outras áreas', price: 'R$ 420,00' },
+      { category: 'Médicos/Residentes', price: 'R$ 460,00' },
+    ],
+  },
+];
+
+export default function Tickets() {
+  const [expandedBatch, setExpandedBatch] = useState<number | null>(0);
+
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+      },
+    },
+  };
+
+  const batchVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
+  const categoriesVariants = {
+    hidden: {
+      opacity: 0,
+      height: 0,
+    },
+    visible: {
+      opacity: 1,
+      height: 'auto',
+      transition: {
+        duration: 0.3,
+        staggerChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      height: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
+  const categoryItemVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: {
+      opacity: 1,
+      x: 0,
+    },
+  };
+
+  return (
+    <section id="ingressos" className="py-24 bg-[#F9F4F5]">
+      <div className="container mx-auto px-4">
+        {/* Section Header */}
+        <motion.div
+          className="max-w-3xl mx-auto mb-16 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={headerVariants}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-[#5D2126] mb-6">Ingressos e Preços</h2>
+          <div className="w-16 h-1 bg-[#BC989A] mb-8 mx-auto"></div>
+          <p className="text-lg text-[#593234]">
+            Escolha o plano que melhor se adequa ao seu perfil e garanta sua presença no I CONECC.
+          </p>
+        </motion.div>
+
+        {/* Batches Accordion */}
+        <div className="max-w-4xl mx-auto space-y-4">
+          {ticketBatches.map((batch, index) => (
+            <motion.div
+              key={index}
+              className={`border-l-4 ${batch.highlighted ? 'border-[#5D2126]' : 'border-[#BC989A]'
+                } overflow-hidden`}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={batchVariants}
+              transition={{ delay: index * 0.1 }}
+            >
+              {/* Batch Header */}
+              <motion.button
+                onClick={() => setExpandedBatch(expandedBatch === index ? null : index)}
+                className={`w-full text-left p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-between group ${batch.highlighted
+                    ? 'bg-gradient-to-r from-[#5D2126] to-[#7D4E50] text-[#F9F4F5]'
+                    : 'bg-white'
+                  }`}
+                whileHover={{ x: 5 }}
+              >
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-1">
+                    <p
+                      className={`text-2xl font-bold ${batch.highlighted ? 'text-[#F9F4F5]' : 'text-[#5D2126]'
+                        }`}
+                    >
+                      {batch.name}
+                    </p>
+                    {batch.highlighted && (
+                      <span className="px-3 py-1 bg-[#BC989A] text-[#5D2126] text-xs font-bold rounded-full">
+                        DESTAQUE
+                      </span>
+                    )}
+                  </div>
+                  {batch.subtitle && (
+                    <p
+                      className={`text-sm font-semibold mb-2 ${batch.highlighted ? 'text-[#D4B5B7]' : 'text-[#8C5E60]'
+                        }`}
+                    >
+                      {batch.subtitle}
+                    </p>
+                  )}
+                  <p
+                    className={`text-sm font-semibold ${batch.highlighted ? 'text-[#D4B5B7]' : 'text-[#BC989A]'
+                      }`}
+                  >
+                    {batch.vacancies}
+                  </p>
+                </div>
+                <motion.div
+                  animate={{ rotate: expandedBatch === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDown
+                    className={`w-6 h-6 ${batch.highlighted ? 'text-[#D4B5B7]' : 'text-[#BC989A]'}`}
+                  />
+                </motion.div>
+              </motion.button>
+
+              {/* Categories List */}
+              <AnimatePresence>
+                {expandedBatch === index && (
+                  <motion.div
+                    className="overflow-hidden bg-white"
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    variants={categoriesVariants}
+                  >
+                    <div className="p-6 space-y-4">
+                      {batch.categories.map((cat, catIdx) => (
+                        <motion.div
+                          key={catIdx}
+                          className="flex items-center justify-between p-4 bg-[#F9F4F5] rounded-lg border-l-2 border-[#BC989A]"
+                          variants={categoryItemVariants}
+                          whileHover={{ x: 5, backgroundColor: '#ECD5D7' }}
+                        >
+                          <div className="flex items-center gap-3">
+                            <Check className="w-5 h-5 text-[#BC989A] flex-shrink-0" />
+                            <span className="font-semibold text-[#593234]">{cat.category}</span>
+                          </div>
+                          <span className="text-xl font-bold text-[#5D2126]">{cat.price}</span>
+                        </motion.div>
+                      ))}
+
+                      {/* CTA Button */}
+                      <motion.button
+                        className="w-full mt-4 py-3 px-4 bg-[#5D2126] text-[#F9F4F5] font-bold rounded-lg transition-all duration-300 hover:bg-[#7D4E50]"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        Inscrever-se
+                      </motion.button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

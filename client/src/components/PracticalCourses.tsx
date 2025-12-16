@@ -1,0 +1,178 @@
+import { motion } from 'framer-motion';
+
+const courseDays = [
+  {
+    date: '19/03',
+    day: 'Quinta-feira',
+    title: 'Dia 1',
+    courses: [
+      'Curso de Sutura e Técnicas Cirúrgicas',
+      'Workshop de Procedimentos em Emergência',
+      'Curso Prático de Ultrassonografia',
+    ],
+  },
+  {
+    date: '20/03',
+    day: 'Sexta-feira',
+    title: 'Dia 2',
+    courses: [
+      'Treinamento em ACLS (Advanced Cardiovascular Life Support)',
+      'Curso de Procedimentos Estéticos',
+      'Workshop de Técnicas Endoscópicas',
+    ],
+  },
+  {
+    date: '21/03',
+    day: 'Sábado',
+    title: 'Dia 3',
+    courses: [
+      'Curso de Simulação Realística',
+      'Workshop de Técnicas Minimamente Invasivas',
+      'Treinamento em Procedimentos Ortopédicos',
+    ],
+  },
+];
+
+export default function PracticalCourses() {
+  const headerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.7,
+      },
+    },
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+      },
+    },
+  };
+
+  return (
+    <section id="cursos" className="relative py-24 overflow-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-40"
+        style={{
+          backgroundImage: 'url(/images/practical_courses.png)',
+        }}
+      ></div>
+
+      {/* Background Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#5D2126]/90 to-[#593234]/85"></div>
+
+      {/* Content */}
+      <div className="container relative z-10 mx-auto px-4">
+        {/* Section Header */}
+        <motion.div
+          className="max-w-3xl mx-auto mb-16 text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={headerVariants}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-[#F9F4F5] mb-6">Cursos Práticos</h2>
+          <div className="w-16 h-1 bg-[#BC989A] mb-8 mx-auto"></div>
+          <p className="text-lg text-[#D4B5B7]">
+            Os cursos práticos acontecem de 19 a 21 de março de 2026, oferecendo treinamento hands-on em
+            diversas especialidades médicas.
+          </p>
+        </motion.div>
+
+        {/* Timeline */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={containerVariants}
+        >
+          {courseDays.map((courseDay, index) => (
+            <motion.div key={index} className="relative" variants={cardVariants}>
+              {/* Card */}
+              <motion.div
+                className="p-8 bg-white rounded-lg shadow-lg h-full"
+                whileHover={{ y: -10, scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Date Badge */}
+                <div className="mb-4 inline-block">
+                  <p className="text-2xl font-bold text-[#5D2126]">{courseDay.date}</p>
+                  <p className="text-sm text-[#BC989A] font-semibold">{courseDay.day}</p>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold text-[#5D2126] mb-6">{courseDay.title}</h3>
+
+                {/* Courses List */}
+                <ul className="space-y-4">
+                  {courseDay.courses.map((course, idx) => (
+                    <motion.li
+                      key={idx}
+                      className="flex gap-3"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * idx }}
+                    >
+                      <div className="flex-shrink-0 w-2 h-2 bg-[#BC989A] rounded-full mt-2"></div>
+                      <span className="text-[#593234] font-medium">{course}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              {/* Connector Line (hidden on mobile) */}
+              {index < courseDays.length - 1 && (
+                <motion.div
+                  className="hidden md:block absolute top-1/2 -right-4 w-8 h-1 bg-[#BC989A]"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 + index * 0.2 }}
+                ></motion.div>
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
+          <motion.a
+            href="#ingressos"
+            className="inline-block px-8 py-4 bg-[#BC989A] text-[#5D2126] font-bold rounded-lg transition-all duration-300 hover:bg-[#D4B5B7] hover:shadow-2xl"
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Inscreva-se nos Cursos
+          </motion.a>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
