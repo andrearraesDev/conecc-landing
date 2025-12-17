@@ -5,11 +5,12 @@ import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
 
-
-
-
 export default defineConfig({
-  plugins,
+  plugins: [
+    react(),
+    tailwindcss(),
+    jsxLocPlugin(),
+  ],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
