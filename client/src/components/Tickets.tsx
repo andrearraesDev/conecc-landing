@@ -176,7 +176,7 @@ export default function Tickets() {
               <motion.button
                 onClick={() => setExpandedBatch(expandedBatch === index ? null : index)}
                 className={`w-full text-left p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-between group focus-visible:outline-2 focus-visible:outline-[#5D2126] focus-visible:outline-offset-2 ${batch.highlighted
-                    ? 'bg-gradient-to-r from-[#5D2126] to-[#7D4E50] text-[#F9F4F5]'
+                    ? 'bg-linear-to-r from-[#5D2126] to-[#7D4E50] text-[#F9F4F5]'
                     : 'bg-white'
                   }`}
                 whileHover={{ x: 5 }}
@@ -206,17 +206,25 @@ export default function Tickets() {
                       {batch.subtitle}
                     </p>
                   )}
-                  <p
-                    className={`text-sm font-semibold ${batch.highlighted ? 'text-[#D4B5B7]' : 'text-[#BC989A]'
-                      }`}
-                  >
-                    {batch.vacancies}
-                  </p>
-                  {batch.deadline && (
-                    <p className={`text-xs ${batch.highlighted ? 'text-[#BC989A]' : 'text-[#8C5E60]'} font-semibold`}>
-                      Encerra em {batch.deadline}
+                  <div className="flex flex-col gap-1">
+                    <p
+                      className={`text-sm font-semibold ${batch.highlighted ? 'text-[#D4B5B7]' : 'text-[#BC989A]'
+                        }`}
+                    >
+                      {batch.vacancies}
                     </p>
-                  )}
+                    {batch.remainingVacancies !== undefined && batch.remainingVacancies < batch.totalVacancies && (
+                      <p className={`text-xs ${batch.highlighted ? 'text-[#BC989A]' : 'text-[#8C5E60]'} font-bold`}>
+                        {batch.remainingVacancies <= 10 ? '⚠️ ' : ''}
+                        Apenas {batch.remainingVacancies} {batch.remainingVacancies === 1 ? 'vaga restante' : 'vagas restantes'}
+                      </p>
+                    )}
+                    {batch.deadline && (
+                      <p className={`text-xs ${batch.highlighted ? 'text-[#BC989A]' : 'text-[#8C5E60]'} font-semibold`}>
+                        Encerra em {batch.deadline}
+                      </p>
+                    )}
+                  </div>
                 </div>
                 <motion.div
                   animate={{ rotate: expandedBatch === index ? 180 : 0 }}
@@ -250,7 +258,7 @@ export default function Tickets() {
                           whileHover={{ x: 5, backgroundColor: '#ECD5D7' }}
                         >
                           <div className="flex items-center gap-3">
-                            <Check className="w-5 h-5 text-[#BC989A] flex-shrink-0" />
+                            <Check className="w-5 h-5 text-[#BC989A] shrink-0" />
                             <span className="font-semibold text-[#593234]">{cat.category}</span>
                           </div>
                           <span className="text-xl font-bold text-[#5D2126]">{cat.price}</span>

@@ -80,7 +80,7 @@ export default function Partners() {
                 </motion.div>
 
                 {/* Sponsor Tiers */}
-                <div className="space-y-16">
+                <div className="space-y-12">
                     {sponsorTiers.map((tier, tierIndex) => (
                         <motion.div
                             key={tierIndex}

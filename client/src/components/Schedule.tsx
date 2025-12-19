@@ -123,7 +123,7 @@ export default function Schedule() {
         </motion.div>
 
         {/* Timeline */}
-        <div className="space-y-4">
+        <div className="max-w-4xl mx-auto space-y-4">
           {scheduleDays.map((scheduleDay, index) => (
             <motion.div
               key={index}
@@ -165,12 +165,12 @@ export default function Schedule() {
                     {scheduleDay.events.map((event, eventIdx) => (
                       <motion.div
                         key={eventIdx}
-                        className="p-4 bg-white rounded-lg border-l-2 border-[#8C5E60] ml-2"
+                        className="p-4 bg-white rounded-lg border-l-2 border-[#8C5E60] ml-4"
                         variants={eventItemVariants}
                         whileHover={{ x: 5, backgroundColor: '#F9F4F5' }}
                       >
                         <div className="flex gap-4">
-                          <div className="flex-shrink-0">
+                          <div className="shrink-0">
                             <p className="font-bold text-[#5D2126] min-w-24">{event.time}</p>
                           </div>
                           <div>
