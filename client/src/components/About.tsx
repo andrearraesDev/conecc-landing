@@ -1,5 +1,5 @@
 import { Users, Microscope, Network } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 export default function About() {
   const highlights = [
@@ -23,7 +23,7 @@ export default function About() {
     },
   ];
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -34,26 +34,26 @@ export default function About() {
     },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
 
-  const headerVariants = {
+  const headerVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.7,
-        ease: 'easeOut',
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
@@ -116,9 +116,9 @@ export default function About() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <div className="flex-1 h-px bg-gradient-to-r from-[#BC989A] to-transparent"></div>
+          <div className="flex-1 h-px bg-linear-to-r from-[#BC989A] to-transparent"></div>
           <div className="w-2 h-2 bg-[#BC989A] rounded-full"></div>
-          <div className="flex-1 h-px bg-gradient-to-l from-[#BC989A] to-transparent"></div>
+          <div className="flex-1 h-px bg-linear-to-l from-[#BC989A] to-transparent"></div>
         </motion.div>
       </div>
     </section>

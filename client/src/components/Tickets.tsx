@@ -266,14 +266,17 @@ export default function Tickets() {
                       ))}
 
                       {/* CTA Button */}
-                      <motion.button
-                        className="w-full mt-4 py-3 px-4 bg-[#5D2126] text-[#F9F4F5] font-bold rounded-lg transition-all duration-300 hover:bg-[#7D4E50] focus-visible:outline-2 focus-visible:outline-[#BC989A] focus-visible:outline-offset-2"
+                      <motion.a
+                        href="https://www.even3.com.br/conecc-i-congresso-de-especialidades-clinicas-e-cirurgicas-674375/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full mt-4 py-3 px-4 bg-[#5D2126] text-[#F9F4F5] font-bold rounded-lg transition-all duration-300 hover:bg-[#7D4E50] focus-visible:outline-2 focus-visible:outline-[#BC989A] focus-visible:outline-offset-2 inline-block text-center"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         aria-label={`Inscrever-se no ${batch.name}`}
                       >
                         {batch.highlighted ? 'Garantir Minha Vaga - Economize até R$ 50' : 'Inscrever-se'}
-                      </motion.button>
+                      </motion.a>
                     </div>
                   </motion.div>
                 )}

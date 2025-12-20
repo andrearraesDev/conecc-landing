@@ -159,7 +159,9 @@ export default function Contact() {
                 Não perca a oportunidade de integrar este evento histórico e vivenciar uma experiência científica única.
               </p>
               <motion.a
-                href="#ingressos"
+                href="https://www.even3.com.br/conecc-i-congresso-de-especialidades-clinicas-e-cirurgicas-674375/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-block px-8 py-4 bg-[#5D2126] text-[#F9F4F5] font-bold rounded-lg transition-all duration-300 hover:bg-[#7D4E50] hover:shadow-lg"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
