@@ -131,7 +131,7 @@ export default function Hero() {
             className="inline-block px-8 py-4 bg-[#BC989A] text-[#5D2126] font-bold text-lg rounded-lg transition-all duration-300 hover:bg-[#D4B5B7] hover:shadow-2xl focus-visible:outline-2 focus-visible:outline-[#BC989A] focus-visible:outline-offset-2"
             aria-label="Garantir minha vaga no CONECC 2026"
           >
-            Garantir Minha Vaga - Economize até R$ 50
+            Garantir Minha Vaga
           </motion.a>
         </motion.div>
       </div>

@@ -275,7 +275,7 @@ export default function Tickets() {
                         whileTap={{ scale: 0.98 }}
                         aria-label={`Inscrever-se no ${batch.name}`}
                       >
-                        {batch.highlighted ? 'Garantir Minha Vaga - Economize até R$ 50' : 'Inscrever-se'}
+                        {batch.highlighted ? 'Garantir Minha Vaga' : 'Inscrever-se'}
                       </motion.a>
                     </div>
                   </motion.div>
