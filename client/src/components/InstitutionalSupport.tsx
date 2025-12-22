@@ -71,15 +71,15 @@ export default function InstitutionalSupport() {
                             variants={gridVariants}
                         >
                             {/* Support Grid */}
-                            <motion.div className="grid grid-cols-4 gap-8 max-w-5xl mx-auto" variants={gridVariants}>
+                            <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-5xl mx-auto" variants={gridVariants}>
                                 {Array.from({ length: tier.count }).map((_, index) => (
                                     <motion.div
                                         key={index}
                                         className={`bg-white rounded-lg border-2 border-[#D4B5B7] flex items-center justify-center transition-all duration-300 hover:border-[#BC989A] hover:shadow-lg ${tier.size === 'large'
-                                            ? 'h-48'
+                                            ? 'h-32 sm:h-40 lg:h-48'
                                             : tier.size === 'medium'
-                                                ? 'h-40'
-                                                : 'h-32'
+                                                ? 'h-28 sm:h-36 lg:h-40'
+                                                : 'h-24 sm:h-28 lg:h-32'
                                             }`}
                                         variants={logoVariants}
                                         whileHover={{ y: -5, scale: 1.05 }}

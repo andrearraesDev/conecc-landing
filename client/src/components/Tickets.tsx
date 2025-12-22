@@ -213,12 +213,6 @@ export default function Tickets() {
                     >
                       {batch.vacancies}
                     </p>
-                    {batch.remainingVacancies !== undefined && batch.remainingVacancies < batch.totalVacancies && (
-                      <p className={`text-xs ${batch.highlighted ? 'text-[#BC989A]' : 'text-[#8C5E60]'} font-bold`}>
-                        {batch.remainingVacancies <= 10 ? '⚠️ ' : ''}
-                        Apenas {batch.remainingVacancies} {batch.remainingVacancies === 1 ? 'vaga restante' : 'vagas restantes'}
-                      </p>
-                    )}
                     {batch.deadline && (
                       <p className={`text-xs ${batch.highlighted ? 'text-[#BC989A]' : 'text-[#8C5E60]'} font-semibold`}>
                         Encerra em {batch.deadline}

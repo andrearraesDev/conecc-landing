@@ -21,10 +21,24 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
+    
+    // Format message for WhatsApp
+    const whatsappMessage = `Olá! Meu nome é ${formData.name}.\n\nEmail: ${formData.email}\n\nMensagem:\n${formData.message}`;
+    
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    
+    // WhatsApp Business API URL (you can change the number)
+    // Format: https://wa.me/5511999999999?text=message
+    const whatsappNumber = '5586999999999'; // Replace with actual WhatsApp number
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    // Open WhatsApp in new tab
+    window.open(whatsappUrl, '_blank');
+    
+    // Reset form
     setFormData({ name: '', email: '', message: '' });
+    setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3000);
   };
 
@@ -275,7 +289,7 @@ export default function Contact() {
                   exit={{ opacity: 0 }}
                 >
                   <p className="text-[#5D2126] font-semibold">
-                    ✓ Mensagem enviada com sucesso! Responderemos em breve.
+                    ✓ Redirecionando para WhatsApp...
                   </p>
                 </motion.div>
               )}
