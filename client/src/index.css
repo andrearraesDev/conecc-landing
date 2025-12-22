@@ -131,11 +131,15 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    box-sizing: border-box;
   }
   
   html {
     scroll-padding-top: 6rem; /* Compensar altura do header fixo */
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
   
   @media (min-width: 640px) {
@@ -147,6 +151,10 @@
   body {
     @apply bg-background text-foreground font-sans;
     font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -210,6 +218,13 @@
       scroll-margin-top: 7rem;
     }
   }
+  
+  /* Prevent overflow on all sections */
+  section {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 
   /* Respect reduced motion preference */
   @media (prefers-reduced-motion: reduce) {
@@ -228,15 +243,23 @@
 
   .container {
     width: 100%;
+    max-width: 100%;
     margin-left: auto;
     margin-right: auto;
     padding-left: 1rem; 
     padding-right: 1rem;
+    overflow-x: hidden;
   }
 
   .flex {
     min-height: 0;
     min-width: 0;
+  }
+  
+  /* Prevent horizontal overflow on mobile */
+  img, video, iframe, embed, object {
+    max-width: 100%;
+    height: auto;
   }
 
   @media (min-width: 640px) {
